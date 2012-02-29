@@ -1,0 +1,15 @@
+NEWS: MOBILE-SYNC                                                   29.02.2012
+===============================================================================
+
+# 2.1 (29. February 2012)
+Enhancements:
+  - Added function isynch, which interactively lets you synchronize one folder.
+  - Added help option (only commandline) and text
+  - Added adjustable timeout option
+  - Added internable read_timeout option
+
+ChangeLog:
+  - Replacing all instances of 'echo' with 'printf', since we don't know what
+    we are printing. (Could lead to subtle bugs).
+  - Added function confirm, which confirms a question, to be used with if
+
