@@ -112,7 +112,8 @@ function compress() {
 function synch() {
     output=$1 # output location to sync to
     input=$2  # input directory
-    params=$3 # additional parameters and options to rsync
+    shift 2
+    params=$@ # additional parameters and options to rsync
 
     message "synchronizing: `var $input` to $output"
     printf "rsync -haui --delete $params $input $startdir/$output\n"
@@ -130,7 +131,8 @@ function synch() {
 function isynch() {
     output=$1 # output location to sync to
     input=$2  # input directory
-    params=$3 # additional parameters and options to rsync
+    shift 2
+    params=$@ # additional parameters and options to rsync
 
     message "Confirm synchronizing: `var $input` to $output..."
     sleep $read_timeout
