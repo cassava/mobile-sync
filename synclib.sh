@@ -85,7 +85,7 @@ function ucompress() {
     output=$1 # output file to compress to
     input=$2  # input directory or file to compress
 
-    if [ $input -nt $startdir/$output ]; then
+    if [[ $input -nt $startdir/$output ]]; then
         compress $1 $2
     else
         message "skipping: `var $input`"
@@ -100,9 +100,9 @@ function compress() {
     message "compressing: `var $input` to $output"
     sleep $timeout
     bsdtar cf $startdir/$output $input
-    if [ $? -ne 0 ]; then
+    if [[ $? -ne 0 ]]; then
         error "Last command ended with an error."
-        if [ $force -eq 0 ]; then
+        if [[ $force -eq 0 ]]; then
             exit 2
         fi
     fi
@@ -119,9 +119,9 @@ function synch() {
     printf "rsync -haui --delete $params $input $startdir/$output\n"
     sleep $timeout
     rsync -haui --delete $params $input $startdir/$output | tee -a $logfile
-    if [ $? -ne 0 ]; then
+    if [[ $? -ne 0 ]]; then
         error "Last command ended with an error."
-        if [ $force -eq 0 ]; then
+        if [[ $force -eq 0 ]]; then
             exit 2
         fi
     fi
@@ -147,9 +147,9 @@ function isynch() {
         sleep $read_timeout
         rsync -ruin --delete $params $input $startdir/$output | sed -e "1 i FILES NOT DELETED FROM ${output}:\n\n" | tee -a $logfile | less
 
-        if [ $retval -ne 0 ]; then
+        if [[ $retval -ne 0 ]]; then
             error "Last command ended with an error."
-            if [ $force -eq 0 ]; then
+            if [[ $force -eq 0 ]]; then
                 exit 2
             fi
         fi
@@ -169,25 +169,25 @@ function isynch() {
 #    Or if you just want to allow it
 #       root="allowed"
 #
-if [ $(hostname) != "$host" ]; then
+if [[ $(hostname) != "$host" ]]; then
     error "Will only sync from `host $host`!"
     exit 1
-elif [ $(dirname $0) != "." ]; then
+elif [[ $(dirname $0) != "." ]]; then
     error "Run $(var `basename $0`) in it's own directory!"
     exit 1
 fi
 
 # Check rules concerning root usage
 if [ $(id -u) -ne 0 ]; then
-    if [ "$root" == "required" ]; then
+    if [[ $root == "required" ]]; then
         error "Need root privileges!"
         exit 1
     fi
 else
-    if [ "$root" != "required" -a "$root" != "allowed" ]; then
+    if [[ $root != "required" && $root != "allowed" ]]; then
         error "Refuse to run as root!"
         exit 1
-    elif [ "$root" == "allowed" ]; then
+    elif [[ $root == "allowed" ]]; then
         info "Warning: Running as root, though not required."
     fi
 fi
@@ -195,13 +195,13 @@ fi
 # Declare variables
 startdir=$(pwd)
 force=0
-if [ -z "$timeout" ]; then
+if [[ -z $timeout ]]; then
     timeout=3
 fi
-if [ -z "$read_timeout" ]; then
+if [[ -z $read_timeout ]]; then
     read_timeout=2
 fi
-if [ -z "$logfile" ]; then
+if [[ -z $logfile ]]; then
     $logfile="$startdir/sync.log"
 fi
 
