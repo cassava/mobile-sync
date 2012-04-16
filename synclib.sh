@@ -1,6 +1,6 @@
 # synclib.sh
 
-# Version 2.1  (29. February 2012)
+# Version 2.2  (16. April 2012)
 # Copyright (c) 2010-2012, Ben Morgan <neembi@googlemail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-_version="2.1"
+_version="2.2"
 
 # Set the colors for the terminal
 cBOLD="\e[1m"
@@ -99,7 +99,7 @@ function compress() {
 
     message "compressing: `var $input` to $output"
     sleep $timeout
-    bsdtar cf $startdir/$output $input
+    tar caf $startdir/$output $input
     if [[ $? -ne 0 ]]; then
         error "Last command ended with an error."
         if [[ $force -eq 0 ]]; then

@@ -1,9 +1,14 @@
 NEWS: MOBILE-SYNC                                                   29.02.2012
 ===============================================================================
 
+# 2.2 (16. April 2012)
+Bugfixes:
+  - compress() function now compresses the archive based on file ending;
+    the program tar is used now instead of bsdtar.
+
 # 2.1 (29. February 2012)
 Enhancements:
-  - Added function isynch, which interactively lets you synchronize one folder.
+  - Added function isynch, which interactively lets you synchronize one folder
   - Added help option (only commandline) and text
   - Added adjustable timeout option
   - Added internable read_timeout option
