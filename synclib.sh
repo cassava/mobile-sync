@@ -202,7 +202,7 @@ if [[ -z $read_timeout ]]; then
     read_timeout=2
 fi
 if [[ -z $logfile ]]; then
-    $logfile="$startdir/sync.log"
+    logfile="$startdir/sync.log"
 fi
 
 # Parse arguments
