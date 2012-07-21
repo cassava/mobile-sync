@@ -26,8 +26,11 @@ host="mercury"
 # logfile (optional, default=sync.log)
 #logfile="sync.log"
 
+# timefile (optional, default=sync.time)
+#timefile="sync.time"
+
 # Include dependancy, which will parse arguments and do some checking.
-. synclib.sh
+. ./synclib.sh
 
 ##########################################################################
 # SYNC FUNCTIONS AVAILABLE
@@ -50,6 +53,9 @@ host="mercury"
 #   host    :: Purple color for host
 #
 ##########################################################################
+
+# Remove this line when you are done
+exit 1
 
 # Start Sync
 info "Starting sync from `host $host`..."

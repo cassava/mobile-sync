@@ -1,5 +1,9 @@
-NEWS: MOBILE-SYNC                                                   29.02.2012
+NEWS: MOBILE-SYNC                                                   21.07.2012
 ===============================================================================
+
+# 2.3 (21. July 2012)
+Enhancements:
+  - prints the current date and time using date function into a timestamp file.
 
 # 2.2 (16. April 2012)
 Bugfixes:

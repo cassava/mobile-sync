@@ -1,6 +1,6 @@
 # synclib.sh
 
-# Version 2.2  (16. April 2012)
+# Version 2.3  (21. July 2012)
 # Copyright (c) 2010-2012, Ben Morgan <neembi@googlemail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-_version="2.2"
+_version="2.3"
 
 # Set the colors for the terminal
 cBOLD="\e[1m"
@@ -127,7 +127,8 @@ function synch() {
     fi
 }
 
-# Use rsync to interactively keep destination synchronized
+# Use rsync to interactively keep destination synchronized.
+# I personally do not like this function; it feels 'dirty'.
 function isynch() {
     output=$1 # output location to sync to
     input=$2  # input directory
@@ -204,6 +205,9 @@ fi
 if [[ -z $logfile ]]; then
     logfile="$startdir/sync.log"
 fi
+if [[ -z $timefile ]]; then
+    timefile="$startdir/sync.time"
+fi
 
 # Parse arguments
 while [ $# -gt 0 ]; do
@@ -237,4 +241,5 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+date > $timefile
 printf "\n\n$(date) :: synclib version $_version =====\n" >> $logfile
