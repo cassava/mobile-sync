@@ -57,9 +57,10 @@ function host() {
 }
 
 function confirm() {
-    msg=$1  # message to print: "$msg [y/N] "
+    local msg=$1  # message to print: "$msg [y/N] "
 
     printf "$cBOLD$cBLUE::$cWHITE $msg $cESC[y/N] "
+    local ans
     read -r ans
     case $ans in
         y|yes|Y|Yes )
@@ -73,7 +74,7 @@ function confirm() {
 
 # Turn force temporarily on for the following command.
 function force() {
-    force_bak=$force
+    local force_bak=$force
     force=1
     $@
     force=$force_bak
@@ -94,8 +95,8 @@ function ucompress() {
 
 # Compress a directory or file to the given location on this usb drive.
 function compress() {
-    output=$1 # output file to compress to
-    input=$2  # input directory or file to compress
+    local output=$1 # output file to compress to
+    local input=$2  # input directory or file to compress
 
     message "compressing: `var $input` to $output"
     sleep $timeout
@@ -110,10 +111,10 @@ function compress() {
 
 # Use rsync to keep two folders synchronized.
 function synch() {
-    output=$1 # output location to sync to
-    input=$2  # input directory
+    local output=$1 # output location to sync to
+    local input=$2  # input directory
     shift 2
-    params=$@ # additional parameters and options to rsync
+    local params=$@ # additional parameters and options to rsync
 
     message "synchronizing: `var $input` to $output"
     printf "rsync -haui --delete $params $input $startdir/$output\n"
@@ -130,10 +131,10 @@ function synch() {
 # Use rsync to interactively keep destination synchronized.
 # I personally do not like this function; it feels 'dirty'.
 function isynch() {
-    output=$1 # output location to sync to
-    input=$2  # input directory
+    local output=$1 # output location to sync to
+    local input=$2  # input directory
     shift 2
-    params=$@ # additional parameters and options to rsync
+    local params=$@ # additional parameters and options to rsync
 
     message "Confirm synchronizing: `var $input` to $output..."
     sleep $read_timeout
