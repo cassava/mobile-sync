@@ -160,6 +160,19 @@ function isynch() {
     fi
 }
 
+# Find the mount point of a filesystem via UUID.
+function mountpoint() {
+    local result=$1 # variable to store result
+    local uuid=$2   # UUID of filesystem
+
+    local mntpt=$(lsblk --output UUID,MOUNTPOINT | grep "$uuid" | sed "s/$uuid\s*//")
+    if [[ -z $mntpt || ! -d $mntpt  ]]; then
+        error "Cannot find mountpoint for filesystem with UUID $uuid!"
+        exit 2
+    fi
+    eval $result="'$mntpt'"
+}
+
 
 # Requirements must be fulfilled:
 #

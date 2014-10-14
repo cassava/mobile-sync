@@ -9,7 +9,7 @@
 
 # host (required)
 # This script will fail to run on any other host then the one specified.
-host="mercury"
+host="atlas"
 
 # root (optional, default=disallowed)
 # Possible values for root are: allowed, required, disallowed.
@@ -36,10 +36,11 @@ host="mercury"
 # SYNC FUNCTIONS AVAILABLE
 #
 # Following functions are available:
-#   synch     $output $input $parameters
-#   isynch    $output $input $parameters
-#   compress  $output $input
-#   ucompress $outupt $input
+#   synch       $output $input $parameters
+#   isynch      $output $input $parameters
+#   compress    $output $input
+#   ucompress   $output $input
+#   mountpoint  $result $uuid
 #
 # The following functions color output text
 #   info    :: BOLD Green ==> White
@@ -54,6 +55,10 @@ host="mercury"
 #
 ##########################################################################
 
+# Get home mount point and fail if it does not exist
+mountpoint home 1f04aca3-0c2f-47b9-bd76-194c8df55927
+info "HOME directory is mounted to $home"
+
 # Remove this line when you are done
 exit 1
 
@@ -62,12 +67,12 @@ info "Starting sync from `host $host`..."
 message "Timeout is set to $timeout."
 
 info "Syncing from `group home`:"
-synch home/benmorgan                /home/benmorgan/    "--exclude-from=benmorgan.exclude --ignore-errors"
-synch home/cassava                  /home/cassava/
-synch home/virtual                  /home/virtual/
+synch home/benmorgan                $home/benmorgan/    "--exclude-from=benmorgan.exclude --ignore-errors"
+synch home/cassava                  $home/cassava/
+synch home/virtual                  $home/virtual/
 
 info "Backing up from `group home`:"
-ucompress backups/container         /home/benmorgan/personal/.container
+ucompress backups/container         $home/benmorgan/personal/.container
 
 info "Syncing from `group root`:"
 synch root                          /root/
