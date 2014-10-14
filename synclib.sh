@@ -1,6 +1,6 @@
 # synclib.sh
 
-# Version 2.3  (21. July 2012)
+# Version 2.4  (14. October 2014)
 # Copyright (c) 2010-2012, Ben Morgan <neembi@googlemail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-_version="2.3"
+_version="2.4"
 
 # Set the colors for the terminal
 cBOLD="\e[1m"
