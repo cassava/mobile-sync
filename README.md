@@ -107,18 +107,18 @@ This then, is how `sync.sh` looks like:
     message "Timeout is set to $timeout."
 
     info "Syncing from `group home`:"
-    synch home/benmorgan                $home/benmorgan/    "--exclude-from=cassava.exclude --ignore-errors"
-    synch home/virtual                  $home/virtual/
+    synch home/cassava             $home/cassava/    "--exclude-from=cassava.exclude --ignore-errors"
+    synch home/virtual             $home/virtual/
 
     info "Syncing from `group root`:"
-    synch cloned/root                   /root/
+    synch cloned/root              /root/
 
     info "Syncing from `group websites`:"
-    synch cloned/srv                    /srv/
+    synch cloned/srv               /srv/
 
     info "Backing up from `group system:`"
-    ucompress backups/etc.tar.gz        /etc
-    ucompress backups/mysql.tar.gz      /var/lib/mysql
+    ucompress backups/etc.tar.gz   /etc
+    ucompress backups/mysql.tar.gz /var/lib/mysql
 
     info "Creating snapshot `var $(date +"%Y-%m-%d")`..."
     btrfs subvolume snapshot -r mirror snapshots/$(date +"%Y-%m-%d")
