@@ -1,7 +1,7 @@
 # synclib.sh
 
-# Version 2.4  (14. October 2014)
-# Copyright (c) 2010-2014, Ben Morgan <neembi@googlemail.com>
+# Version 2.5  (3. February 2015)
+# Copyright (c) 2010-2015, Ben Morgan <neembi@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-_version="2.4"
+_version="2.5"
 
 # Set the colors for the terminal
 cBOLD="\e[1m"
@@ -177,14 +177,14 @@ function mountpoint() {
 # Requirements must be fulfilled:
 #
 # NOTE:
-#    Make sure that you set the variables:
+#    Make sure that you set the variables if you want to restrict usage to a single host.
 #       hostname="hostname"
 #    And if you need root access
 #       root="required"
 #    Or if you just want to allow it
 #       root="allowed"
 #
-if [[ $(hostname) != "$host" ]]; then
+if [[ ! -z $host && $(hostname) != "$host" ]]; then
     error "Will only sync from `host $host`!"
     exit 1
 elif [[ $(dirname $0) != "." ]]; then

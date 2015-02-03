@@ -7,7 +7,7 @@
 # OPTIONS:
 # It is important that these options are specified before sourcing synclib.sh!
 
-# host (required)
+# host (optional)
 # This script will fail to run on any other host then the one specified.
 host="atlas"
 
