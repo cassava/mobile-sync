@@ -248,7 +248,7 @@ while [ $# -gt 0 ]; do
             echo "  -l --logfile <file> set logfile to the path given"
             echo "  -r --readtime <sec> set the reading timeout (in seconds) before starting less"
             echo "  -t --timeout <sec>  set timeout (in seconds) to wait before running a command"
-            shift 1;;
+            exit 1;;
         *)
             error "Unknown parameter"
             exit 1;;
