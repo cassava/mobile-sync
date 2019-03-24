@@ -1,6 +1,11 @@
 News
 ====
 
+## 2.6 (19. March 2019)
+
+  - Better handling of FAT filesystems by using `--modify-window=4`.
+    This can be modified or removed in the library file if not using FAT.
+
 ## 2.5 (3. February 2015)
 
   - The `host` constraint is now optional.
@@ -27,12 +32,11 @@ Minor release to provide a feature that I need.
 ## 2.1 (29. February 2012)
 
   - Added function `isynch`, which interactively lets you synchronize
-    one folder
-  - Added `--help` option (only commandline) and text
-  - Added adjustable timeout option
-  - Added internable `read_timeout` option
+    one folder.
+  - Added `--help` option (only commandline) and text.
+  - Added adjustable timeout option.
+  - Added internable `read_timeout` option.
   - Replacing all instances of `echo` with `printf`, since we don't
     know what we are printing (could lead to subtle bugs).
   - Added function confirm, which confirms a question, to be used
-    with `if`
-
+    with `if`.

@@ -1,7 +1,7 @@
 # synclib.sh
 
-# Version 2.5  (3. February 2015)
-# Copyright (c) 2010-2015, Ben Morgan <neembi@gmail.com>
+# Version 2.6  (24. March 2019)
+# Copyright (c) 2010-2019, Ben Morgan <neembi@gmail.com>
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,7 +15,10 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-_version="2.5"
+_version="2.6"
+
+# Options:
+_modify_window="--modify-window=4"
 
 # Set the colors for the terminal
 cBOLD="\e[1m"
@@ -117,9 +120,9 @@ function synch() {
     local params=$@ # additional parameters and options to rsync
 
     message "synchronizing: `var $input` to $output"
-    printf "rsync -haui --delete $params $input $startdir/$output\n"
+    printf "rsync -haui --delete $_modify_window $params '$input' '$startdir/$output'\n"
     sleep $timeout
-    rsync -haui --delete $params $input $startdir/$output | tee -a $logfile
+    rsync -haui --delete $_modify_window $params "$input" "$startdir/$output" | tee -a $logfile
     if [[ $? -ne 0 ]]; then
         error "Last command ended with an error."
         if [[ $force -eq 0 ]]; then
@@ -138,16 +141,16 @@ function isynch() {
 
     message "Confirm synchronizing: `var $input` to $output..."
     sleep $read_timeout
-    rsync -ruin $params $input $startdir/$output | sed -e "1 i FILES TO BE SYNCHRONIZED FROM ${input} TO ${output}:\n\n" | less -F
+    rsync -ruin $_modify_window $params "$input" "$startdir/$output" | sed -e "1 i FILES TO BE SYNCHRONIZED FROM ${input} TO ${output}:\n\n" | less -F
     if confirm "Are you sure you want to synchronize?"; then
-        printf "rsync -rui $params $input $startdir/$output\n"
+        printf "rsync -rui $_modify_window $params '$input' '$startdir/$output'\n"
         sleep $timeout
-        rsync -rui $params $input $startdir/$output | tee -a $logfile
+        rsync -rui $_modify_window $params $input $startdir/$output | tee -a $logfile
         retval=$?
 
         message "The following has NOT been deleted at destination:"
         sleep $read_timeout
-        rsync -ruin --delete $params $input $startdir/$output | sed -e "1 i FILES NOT DELETED FROM ${output}:\n\n" | tee -a $logfile | less
+        rsync -ruin --delete $_modify_window $params $input $startdir/$output | sed -e "1 i FILES NOT DELETED FROM ${output}:\n\n" | tee -a $logfile | less
 
         if [[ $retval -ne 0 ]]; then
             error "Last command ended with an error."
